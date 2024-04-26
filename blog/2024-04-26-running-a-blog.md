@@ -2,8 +2,14 @@
 slug: my-developer-blog
 title: In-House Developer blog
 authors: koby
-tags: [developer, blog, docosaurus, cloudflare]
+tags: [blog, docosaurus, cloudflare, giscus]
 ---
+
+:::info
+
+The blog [GitHub repository](https://github.com/kobybum/website) is public, you're welcome to take a look :)
+
+:::
 
 Here's a quick explanation on why I decided to open my own blog, and how I manage it.
 
@@ -25,7 +31,13 @@ It's quite simple to do, and has some real advantages -
 
 The stack I use for the blog is quite simple -
 
-- Domain - You can buy your domain wherever you prefer, I chose GoDaddy because they had the lowest price for my domain.
+- Domain name
 - [Docosaurus](https://docusaurus.io/) - A facebook open-source for managing docs and blogs
-- GitHub repository
-- [Cloudflare Pages](https://pages.cloudflare.com/) - Free CI/CD and global CDN
+  - Great tool for managing content
+  - Support for [Mermaid diagrams](https://docusaurus.io/docs/markdown-features/diagrams)
+  - Markdown renderer
+  - [Code block renderer](https://docusaurus.io/docs/markdown-features/code-blocks)
+- **Public** [GitHub repository](https://github.com/kobybum/website)
+- [Cloudflare Pages](https://pages.cloudflare.com/) - Compeletely free CDN with CI/CD
+- [Giscus](https://github.com/giscus/giscus) - For free comment management powered by GitHub discussions.
+  - [Daniel Farlow](https://dwf.dev/blog/2022/10/27/2022/giscus-comments/) wrote a great post on how to integrate Giscus into Docosaurus.
