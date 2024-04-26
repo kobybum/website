@@ -4,19 +4,39 @@ import Layout from "@theme/Layout";
 import clsx from "clsx";
 
 import styles from "./index.module.css";
+import { ColorMode, useColorMode } from "@docusaurus/theme-common";
 
 function HomepageHeader() {
+  const { colorMode } = useColorMode();
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
+      <div
+        style={{
+          position: "absolute",
+          inset: "0",
+          overflow: "hidden",
+        }}
+        className={styles.circles}
+      >
+        {/* Credit to https://codepen.io/mohaiman/pen/MQqMyo */}
+        {Array.from({ length: 10 }).map(() => (
+          <li />
+        ))}
+      </div>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          Koby Bass
-        </Heading>
+        <img
+          src="/img/logo_transparent.png"
+          alt="Transparent Logo"
+          style={{
+            height: "16rem",
+            width: "16rem",
+            filter: colorMode === "dark" && "invert()",
+          }}
+        />
+
         <Heading as="h2">Full-Stack and DevOps</Heading>
-        <p>I'm a passionate DevOps engineer and full-stack developer.</p>
-        <p>
-          This is my personal blog, meant to share my thoughts, tips and tricks
-          with the community.
+        <p style={{ fontWeight: "500" }}>
+          Sharing thoughts, tips and tricks with the community.
         </p>
       </div>
       {/* <div className={styles.buttons}>

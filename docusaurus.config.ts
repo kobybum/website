@@ -69,7 +69,7 @@ const config: Config = {
         { to: "/blog", label: "Dev Blog", position: "left" },
         {
           label: "GitHub",
-          href: "https://github.com/kobybum",
+          href: "https://github.com/kobybum/website",
           position: "right",
         },
       ],
