@@ -81,8 +81,8 @@ const config: Config = {
           title: "Blog",
           items: [
             {
-              label: "Initial Post",
-              to: "/blog/hello",
+              label: "Blog",
+              to: "/blog",
             },
           ],
         },
