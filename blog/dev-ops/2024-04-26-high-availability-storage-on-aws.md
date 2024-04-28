@@ -5,7 +5,6 @@ description: Learn how to utilize Rook to support multi AZ deployments of Promet
 authors: koby
 toc_min_heading_level: 2
 toc_max_heading_level: 4
-draft: true
 tags:
   [
     DevOps,
