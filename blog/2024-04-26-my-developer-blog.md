@@ -2,7 +2,7 @@
 slug: my-developer-blog
 title: In-House Developer blog
 authors: koby
-tags: [blog, docosaurus, cloudflare, giscus]
+tags: [blog, react, docosaurus, cloudflare, giscus]
 ---
 
 :::info

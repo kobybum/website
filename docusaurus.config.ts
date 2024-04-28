@@ -2,12 +2,14 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
+const url = "https://koby.one";
+
 const config: Config = {
   title: "Koby Bass - Dev Blog",
-  tagline: "Jedi Dev",
+
   favicon: "img/favicon.ico",
 
-  url: "https://koby.one",
+  url,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -27,13 +29,7 @@ const config: Config = {
     [
       "classic",
       {
-        // docs: {
-        //   sidebarPath: "./sidebars.ts",
-        //   // Please change this to your repo.
-        //   // Remove this to remove the "edit this page" links.
-        //   editUrl:
-        //     "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        // },
+        docs: false,
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
@@ -49,9 +45,16 @@ const config: Config = {
   ],
 
   stylesheets: [],
+  headTags: [
+    // { tagName: "link", attributes: { rel: "preconnect", href: `${url}/blog` } },
+  ],
   themeConfig: {
     // Replace with your project's social card
     image: "img/social-card.png",
+    metadata: [
+      { name: "keywords", content: "DevOps, Go, TypeScript, Cloud, AWS" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
     navbar: {
       title: "Koby Bass",
       logo: {

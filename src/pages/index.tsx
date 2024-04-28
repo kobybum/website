@@ -4,7 +4,7 @@ import Layout from "@theme/Layout";
 import clsx from "clsx";
 
 import styles from "./index.module.css";
-import { ColorMode, useColorMode } from "@docusaurus/theme-common";
+import { useColorMode } from "@docusaurus/theme-common";
 
 function HomepageHeader() {
   const { colorMode } = useColorMode();
@@ -52,7 +52,7 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   return (
-    <Layout description="Full-stack developer and DevOps engineer">
+    <Layout description="Full-stack and DevOps">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
