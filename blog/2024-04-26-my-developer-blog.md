@@ -2,10 +2,11 @@
 slug: my-developer-blog
 title: In-House Developer blog
 authors: koby
+description: How to create Free, hosted blog with comments using Docosaurus, CloudFlare Pages and Giscus.
 tags: [blog, react, docosaurus, cloudflare, giscus]
 ---
 
-:::info
+:::tip
 
 The blog [GitHub repository](https://github.com/kobybum/website) is public, you're welcome to take a look :)
 
@@ -41,3 +42,5 @@ The stack I use for the blog is quite simple -
 - [Cloudflare Pages](https://pages.cloudflare.com/) - Compeletely free CDN with CI/CD
 - [Giscus](https://github.com/giscus/giscus) - For free comment management powered by GitHub discussions.
   - [Daniel Farlow](https://dwf.dev/blog/2022/10/27/2022/giscus-comments/) wrote a great post on how to integrate Giscus into Docosaurus.
+- [Google Search Console](https://search.google.com/search-console?resource_id=sc-domain%3Akoby.one)
+  - Ask Google to index your site and get performance audits
