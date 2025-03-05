@@ -16,11 +16,11 @@
   },
   "dependencies": {
     "@docusaurus/core": "3.2.1",
-    "@docusaurus/plugin-google-gtag": "^3.2.1",
-    "@docusaurus/plugin-ideal-image": "^3.2.1",
+    "@docusaurus/plugin-google-gtag": "3.2.1",
+    "@docusaurus/plugin-ideal-image": "3.2.1",
     "@docusaurus/preset-classic": "3.2.1",
-    "@docusaurus/theme-live-codeblock": "^3.2.1",
-    "@docusaurus/theme-mermaid": "^3.2.1",
+    "@docusaurus/theme-live-codeblock": "3.2.1",
+    "@docusaurus/theme-mermaid": "3.2.1",
     "@mdx-js/react": "^3.0.1",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.3.1",
@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.2.1",
-    "@docusaurus/theme-common": "^3.2.1",
+    "@docusaurus/theme-common": "3.2.1",
     "@docusaurus/tsconfig": "3.2.1",
     "@docusaurus/types": "3.2.1",
-    "@docusaurus/utils-common": "^3.2.1",
+    "@docusaurus/utils-common": "3.2.1",
     "@giscus/react": "^3.0.0",
     "typescript": "~5.2.2"
   },
@@ -50,5 +50,10 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }
