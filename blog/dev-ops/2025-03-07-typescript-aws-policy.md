@@ -12,6 +12,8 @@ date: 2025-03-07
 
 # TypeScript AWS Policies with @cdklib/aws-policy
 
+> For more details and CDK libraries, check out the [@cdklib project readme](https://github.com/kobybum/cdk-libs).
+
 After working with AWS for a while, I've found myself writing the same IAM policy patterns over and over. Whether you're using CDK, Terraform, or just the AWS console, policy creation often involves copying JSON snippets and tweaking them for your specific resources.
 
 I wanted a more TypeScript-friendly way to handle this common task, so I built `@cdklib/aws-policy` - a simple library that brings type safety to AWS IAM policies.
@@ -151,7 +153,7 @@ As you build more AWS resources, you'll find yourself creating similar policies 
 import { AwsPreparedPolicy } from "@cdklib/aws-policy";
 
 // Define a reusable policy template
-const s3BucketPolicy = AwsPreparedPolicy.new<{
+const s3BucketPolicy = new AwsPreparedPolicy<{
   bucketName: string;
 }>((params) => ({
   Effect: "Allow",
@@ -180,20 +182,19 @@ This approach helps eliminate duplicate code while keeping your policies type-sa
 
 ## Integration with CdkConfig
 
-If you're using the `@cdklib/config` library I mentioned in my [previous post](http://localhost:3001/blog/DevOps/cdk-config), you can create scope-aware prepared policies.
-
-This gives you access to environment configuration (account id, region, cluster names, etc) when filling the policy:
+If you're using the `@cdklib/config` library I mentioned in my [previous post](/blog/DevOps/cdk-config), you can create policies that use the CDK scope to access configuration:
 
 ```typescript
 import { AwsPreparedPolicy } from "@cdklib/aws-policy";
-import { awsConfig } from "./config";
+import { awsConfig } from "./config/aws";
 
-// Define a policy that uses config from the scope
-const s3BucketPolicy = AwsPreparedPolicy.newScoped<{
+// Define a policy that includes scope as a parameter
+const s3BucketPolicy = new AwsPreparedPolicy<{
+  scope: Construct;
   bucketName: string;
-}>((scope, { bucketName }) => {
+}>(({ scope, bucketName }) => {
   // Get config values from scope
-  const { accountId, region } = awsConfig.get(scope);
+  const { accountId } = awsConfig.get(scope);
 
   return {
     Effect: "Allow",
@@ -205,9 +206,50 @@ const s3BucketPolicy = AwsPreparedPolicy.newScoped<{
   };
 });
 
-// Use it in your construct
-const policy = s3BucketPolicy.fill(this, {
+// Provide scope and parameters
+const policy = s3BucketPolicy.fill({
+  scope: myApp,
   bucketName: "app-assets",
+});
+```
+
+## Combining Policies
+
+You can combine multiple policies together, for example granting S3 read access and Lambda invoke access.
+
+The policy statements are combined - the library does not attempt to merge policies logically.
+
+```typescript
+// Define individual policies
+const s3ReadPolicy = new AwsPreparedPolicy<{ bucketName: string }>(
+  (params) => ({
+    Effect: "Allow",
+    Action: ["s3:GetObject", "s3:ListBucket"],
+    Resource: [
+      `arn:aws:s3:::${params.bucketName}`,
+      `arn:aws:s3:::${params.bucketName}/*`,
+    ],
+  })
+);
+
+const lambdaInvokePolicy = new AwsPreparedPolicy<{ functionName: string }>(
+  (params) => ({
+    Effect: "Allow",
+    Action: "lambda:InvokeFunction",
+    Resource: `arn:aws:lambda:*:*:function:${params.functionName}`,
+  })
+);
+
+// Combine policies - parameters are combined
+const combinedPolicy = AwsPreparedPolicy.combine(
+  s3ReadPolicy,
+  lambdaInvokePolicy
+);
+
+// Fill with all required parameters
+const policy = combinedPolicy.fill({
+  bucketName: "my-bucket",
+  functionName: "my-function",
 });
 ```
 
@@ -216,5 +258,3 @@ const policy = s3BucketPolicy.fill(this, {
 The `@cdklib/aws-policy` library is a small utility that makes working with AWS IAM policies a bit nicer in TypeScript projects.
 
 The library is open source and available on GitHub, where you can find more examples and documentation. Feel free to use it, modify it, or build on it to fit your needs.
-
-For more details and CDK libraries, check out the [project readme](https://github.com/kobybum/cdk-libs).
